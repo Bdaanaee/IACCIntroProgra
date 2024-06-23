@@ -1,0 +1,150 @@
+//PSEUDOCÓDICOS TAREA 3
+
+
+ALGORITMO 1
+
+Algoritmo PromedioAprobadosReprobados
+	// Variables para el total de alumnos 
+	Definir totalAlumnos, hombresAprobados, mujeresAprobados, hombresReprobados, mujeresReprobados Como Entero
+	Definir sumaNotasAprobados, sumaNotasReprobados Como Real
+	Definir nota Como Real
+	Definir sexo, estado Como Cadena
+	totalAlumnos <- 0
+	hombresAprobados <- 0
+	mujeresAprobados <- 0
+	hombresReprobados <- 0
+	mujeresReprobados <- 0
+	sumaNotasAprobados <- 0
+	sumaNotasReprobados <- 0
+	// Leer la cantidad total de alumnos
+	Escribir 'Ingrese la cantidad total de alumnos: '
+	Leer totalAlumnos
+	// Loop para ingresar datos de cada alumno
+	Para i<-1 Hasta totalAlumnos Hacer
+		Escribir 'Ingrese la nota del alumno ', i, ': '
+		Leer nota
+		Escribir 'Ingrese el sexo del alumno ', i, ' (M/F): '
+		Leer sexo
+		Escribir 'Ingrese el estado del alumno ', i, ' (Aprobado/Reprobado): '
+		Leer estado
+		// Clasificar según el sexo y estado
+		Si sexo='M' Entonces
+			Si estado='Aprobado' Entonces
+				hombresAprobados <- hombresAprobados+1
+				sumaNotasAprobados <- sumaNotasAprobados+nota
+			SiNo
+				hombresReprobados <- hombresReprobados+1
+				sumaNotasReprobados <- sumaNotasReprobados+nota
+			FinSi
+		SiNo
+			Si estado='Aprobado' Entonces
+				mujeresAprobados <- mujeresAprobados+1
+				sumaNotasAprobados <- sumaNotasAprobados+nota
+			SiNo
+				mujeresReprobados <- mujeresReprobados+1
+				sumaNotasReprobados <- sumaNotasReprobados+nota
+			FinSi
+		FinSi
+	FinPara
+	// Calcular promedios
+	promedioNotasAprobados <- 0
+	promedioNotasReprobados <- 0
+	totalAprobados <- hombresAprobados+mujeresAprobados
+	totalReprobados <- hombresReprobados+mujeresReprobados
+	Si totalAprobados>0 Entonces
+		promedioNotasAprobados <- sumaNotasAprobados/totalAprobados
+	FinSi
+	Si totalReprobados>0 Entonces
+		promedioNotasReprobados <- sumaNotasReprobados/totalReprobados
+	FinSi
+	// Mostrar resultados
+	Escribir 'Promedio de notas de alumnos aprobados: ', promedioNotasAprobados
+	Escribir 'Promedio de notas de alumnos reprobados: ', promedioNotasReprobados
+	Escribir 'Cantidad de hombres aprobados: ', hombresAprobados
+	Escribir 'Cantidad de mujeres aprobados: ', mujeresAprobados
+	Escribir 'Cantidad de hombres reprobados: ', hombresReprobados
+	Escribir 'Cantidad de mujeres reprobados: ', mujeresReprobados
+	Para variable<-valor_inicial Hasta valor_final Hacer
+	
+	FinPara
+FinAlgoritmo
+
+//////////////////////////////////////////////////////////////////////////////////////
+
+ALGORITMO 2:
+
+Algoritmo CantidadHombresMujeres
+    // Variables para el total de alumnos y contadores de género
+    Definir totalAlumnos, hombres, mujeres Como Entero
+    Definir sexo Como Caracter
+    totalAlumnos = 0
+    hombres = 0
+    mujeres = 0
+	
+    // Leer la cantidad total de alumnos
+    Escribir "Ingrese la cantidad total de alumnos: "
+    Leer totalAlumnos
+	
+    // Loop para ingresar el sexo de cada alumno
+    Para i <- 1 Hasta totalAlumnos Hacer
+        Escribir "Ingrese el sexo del alumno ", i, " (M/F): "
+        Leer sexo
+		
+        // Contar según el sexo
+        Si sexo = "M" Entonces
+            hombres = hombres + 1
+        SiNo
+            mujeres = mujeres + 1
+        FinSi
+    FinPara
+	
+    // Mostrar resultados
+    Escribir "Cantidad de hombres: ", hombres
+    Escribir "Cantidad de mujeres: ", mujeres
+FinAlgoritmo
+
+//////////////////////////////////////////////////////////////////////////////////////
+
+ALGORITMO 3:
+
+Algoritmo PromedioEdadHombresMujeres
+	// Variables para el total de alumnos y acumuladores de edades
+	Definir totalAlumnos, hombres, mujeres Como Entero
+	Definir sumaEdadesHombres, sumaEdadesMujeres, edad Como Real
+	Definir sexo Como Cadena
+	totalAlumnos <- 0
+	hombres <- 0
+	mujeres <- 0
+	sumaEdadesHombres <- 0
+	sumaEdadesMujeres <- 0
+	// Leer la cantidad total de alumnos
+	Escribir 'Ingrese la cantidad total de alumnos: '
+	Leer totalAlumnos
+	// Loop para ingresar la edad y sexo de cada alumno
+	Para i<-1 Hasta totalAlumnos Hacer
+		Escribir 'Ingrese el sexo del alumno ', i, ' (M/F): '
+		Leer sexo
+		Escribir 'Ingrese la edad del alumno ', i, ': '
+		Leer edad
+		// Acumular edades según el sexo
+		Si sexo='M' Entonces
+			hombres <- hombres+1
+			sumaEdadesHombres <- sumaEdadesHombres+edad
+		SiNo
+			mujeres <- mujeres+1
+			sumaEdadesMujeres <- sumaEdadesMujeres+edad
+		FinSi
+	FinPara
+	// Calcular promedios de edades
+	promedioEdadHombres <- 0
+	promedioEdadMujeres <- 0
+	Si hombres>0 Entonces
+		promedioEdadHombres <- sumaEdadesHombres/hombres
+	FinSi
+	Si mujeres>0 Entonces
+		promedioEdadMujeres <- sumaEdadesMujeres/mujeres
+	FinSi
+	// Mostrar resultados
+	Escribir 'Promedio de edad de hombres: ', promedioEdadHombres
+	Escribir 'Promedio de edad de mujeres: ', promedioEdadMujeres
+FinAlgoritmo
