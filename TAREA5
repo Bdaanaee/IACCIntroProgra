@@ -1,0 +1,125 @@
+// Definición de variables
+numero_censo: ARREGLO DE ENTERO
+sexo: ARREGLO DE CARACTER
+edad: ARREGLO DE ENTERO
+estado_civil: ARREGLO DE CARÁCTER
+
+i, opcion, total_ciudadanos: ENTERO
+min_edad, max_edad: ENTERO
+filtro_sexo, filtro_estado: CARACTER
+cantidad_registros: ENTERO
+
+// Menú principal
+MIENTRAS VERDADERO HACER
+    // Mostrar opciones del menú
+    ESCRIBIR “Programa de consulta de números de Censo – Estación Ecuador”
+    ESCRIBIR "Menú de opciones:"
+    ESCRIBIR "1. Ingresar datos"
+    ESCRIBIR "2. Consultar por criterios (sexo, rango etario, estado civil)"
+    ESCRIBIR "3. Salir"
+    ESCRIBIR "Ingrese su opción: "
+    LEER opcion
+
+    // Ejecutar la opción seleccionada
+    SEGUN opcion HACER
+        CASO 1:
+            ingresar_datos()
+            guardar_datos_en_archivo()  // Guardar datos al finalizar la opción 1
+            ESCRIBIR "Datos guardados exitosamente."
+        CASO 2:
+            consultar_por_criterios()
+        CASO 3:
+            ESCRIBIR "Fin del programa."
+            SALIR
+        DEFECTO:
+            ESCRIBIR "Opción inválida. Intente de nuevo."
+    FIN SEGUN
+FIN MIENTRAS
+
+// Procedimiento para ingresar datos
+PROCEDIMIENTO ingresar_datos()
+    // Inicialización de variables
+    total_ciudadanos <- 0
+    
+    // Mostrar mensaje para ingresar cantidad de ciudadanos
+    ESCRIBIR "Ingrese el número de ciudadanos a registrar: "
+    LEER total_ciudadanos
+    
+    // Validar que el total de ciudadanos sea positivo
+    MIENTRAS total_ciudadanos <= 0 HACER
+        ESCRIBIR "Ingrese un número válido de ciudadanos (mayor que 0): "
+        LEER total_ciudadanos
+    FIN MIENTRAS
+    
+    // Redimensionar arreglos para almacenar los datos según la cantidad ingresada
+    REDIMENSIONAR numero_censo[1..total_ciudadanos]
+    REDIMENSIONAR sexo[1..total_ciudadanos]
+    REDIMENSIONAR edad[1..total_ciudadanos]
+    REDIMENSIONAR estado_civil[1..total_ciudadanos]
+    
+    // Mostrar la cantidad total de registros totales a ingresar
+    ESCRIBIR "Cantidad de registros totales: ", total_ciudadanos
+    
+    // Ingresar datos para cada ciudadano
+    PARA i DESDE 1 HASTA total_ciudadanos HACER
+        ESCRIBIR "Ingrese el número de censo del ciudadano ", i, ":"
+        LEER numero_censo[i]
+
+        ESCRIBIR "Ingrese el sexo del ciudadano ", i, " (M/F):"
+        LEER sexo[i]
+
+        ESCRIBIR "Ingrese la edad del ciudadano ", i, ":"
+        LEER edad[i]
+
+        ESCRIBIR "Ingrese el estado civil del ciudadano ", i, " (soltero, casado, viudo, divorciado):"
+        LEER estado_civil[i]
+    FIN PARA
+FIN PROCEDIMIENTO
+
+
+// Procedimiento para consultar por número de censo según criterios
+PROCEDIMIENTO consultar_por_criterios()
+    ESCRIBIR "Ingrese el sexo a buscar (M/F): "
+    LEER filtro_sexo
+
+    ESCRIBIR "Ingrese la edad mínima: "
+    LEER min_edad
+
+    ESCRIBIR "Ingrese la edad máxima: "
+    LEER max_edad
+
+    ESCRIBIR "Ingrese el estado civil a buscar (soltero, casado, viudo, divorciado): "
+    LEER filtro_estado
+
+    cantidad_registros <- 0  // Inicializar la cantidad de registros encontrados
+    numeros_censo_encontrados <- ""  // Inicializar la cadena para almacenar números de censo encontrados
+
+    // Iterar sobre cada ciudadano para aplicar filtros
+    PARA i DESDE 1 HASTA total_ciudadanos HACER
+        SI sexo[i] = filtro_sexo Y edad[i] >= min_edad Y edad[i] <= max_edad Y estado_civil[i] = filtro_estado ENTONCES
+            cantidad_registros <- cantidad_registros + 1
+
+            // esta línea construye una lista de números de censo que cumplen con los criterios de búsqueda
+            numeros_censo_encontrados <- numeros_censo_encontrados + "Número " + numero_censo[i] + "\n"
+        FIN SI
+    FIN PARA
+
+    // Mostrar la cantidad total de registros encontrados que cumplen con los criterios
+    ESCRIBIR "Total de registros encontrados: ", cantidad_registros
+
+    // Mostrar los números de censo encontrados, si los hay
+    SI cantidad_registros > 0 ENTONCES
+        ESCRIBIR "Números de censo encontrados:"
+        ESCRIBIR numeros_censo_encontrados
+    SINO
+        ESCRIBIR "No se encontraron registros que cumplan con los criterios especificados."
+    FIN SI
+FIN PROCEDIMIENTO
+
+
+// Procedimiento para guardar datos a archivo
+PROCEDIMIENTO guardar_datos_en_archivo()
+    GUARDAR numero_censo, sexo, edad, estado_civil, total_ciudadanos A ARCHIVO datos_censo
+FIN PROCEDIMIENTO
+
+
