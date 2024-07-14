@@ -1,0 +1,59 @@
+Algoritmo Osters
+    // Declaración de variables
+    Definir facturas Como Entero[100]
+    Definir numClientes, i, descuento Como Entero
+    Definir descuentos Como Entero[4]
+    
+    // Inicialización
+    numClientes <- 0
+    Para i <- 0 Hasta 3 Con Paso 1 Hacer
+        descuentos[i] <- 0
+    FinPara
+
+    // Ingreso de facturas
+    Mientras numClientes < 100 Hacer
+        Escribir "Ingrese la factura del cliente ", numClientes + 1, " (o ingrese -1 para terminar): "
+        Leer facturas[numClientes]
+        
+        // Condición de salida anticipada
+        Si facturas[numClientes] = -1 Entonces
+            Romper
+        FinSi
+        
+        numClientes <- numClientes + 1
+    FinMientras
+
+    // Función para calcular el descuento
+    Funcion calcularDescuento(factura) Como Entero
+        Si factura > 600000 Entonces
+            Retornar 45
+        SinoSi factura >= 300000 Entonces
+            Retornar 25
+        SinoSi factura >= 150000 Entonces
+            Retornar 15
+        Sino
+            Retornar 5
+        FinSi
+    FinFuncion
+
+    // Calcular y contar los descuentos
+    Para i <- 0 Hasta numClientes - 1 Con Paso 1 Hacer
+        descuento <- calcularDescuento(facturas[i])
+        Si descuento = 45 Entonces
+            descuentos[0] <- descuentos[0] + 1
+        SinoSi descuento = 25 Entonces
+            descuentos[1] <- descuentos[1] + 1
+        SinoSi descuento = 15 Entonces
+            descuentos[2] <- descuentos[2] + 1
+        Sino
+            descuentos[3] <- descuentos[3] + 1
+        FinSi
+    FinPara
+
+    // Mostrar el reporte
+    Escribir "Reporte de descuentos aplicados:"
+    Escribir "Descuento del 45%: ", descuentos[0], " clientes"
+    Escribir "Descuento del 25%: ", descuentos[1], " clientes"
+    Escribir "Descuento del 15%: ", descuentos[2], " clientes"
+    Escribir "Descuento del 5%: ", descuentos[3], " clientes"
+FinAlgoritmo
