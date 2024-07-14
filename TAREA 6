@@ -1,4 +1,5 @@
-Algoritmo Osters
+Algoritmo Osters_unidimensional
+
     // Declaración de variables
     Definir facturas Como Entero[100]
     Definir numClientes, i, descuento Como Entero
